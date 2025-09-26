@@ -11,10 +11,9 @@ import Loader from "../Loader/Loader";
 
 export default function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
-  const [movie, setMovie] = useState<Movie>();
+  const [movie, setMovie] = useState<Movie | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const handleSubmit = async (query: string) => {
     try {
       setIsLoading(true);
@@ -32,10 +31,9 @@ export default function App() {
   };
   const handleClick = (movie: Movie) => {
     setMovie(movie);
-    setIsModalOpen(true);
   };
   const handleClose = () => {
-    setIsModalOpen(false);
+    setMovie(null);
   };
   return (
     <div className={css.app}>
@@ -45,7 +43,7 @@ export default function App() {
       )}
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
-      {isModalOpen && movie && (
+      { movie && (
         <MovieModal movie={movie} onClose={handleClose} />
       )}
 

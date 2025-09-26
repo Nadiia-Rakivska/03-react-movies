@@ -1,11 +1,11 @@
 import type { Movie } from "../../types/movie";
 import css from "./MovieGrid.module.css";
 
-interface Props {
+interface MovieGridProps {
   onSelect: (movie: Movie) => void;
   movies: Movie[];
 }
-export default function MovieGrid({ onSelect, movies }: Props) {
+export default function MovieGrid({ onSelect, movies }: MovieGridProps) {
   return (
     <ul className={css.grid}>
       {movies.map((movie) => {
@@ -18,7 +18,7 @@ export default function MovieGrid({ onSelect, movies }: Props) {
                 alt={movie.title}
                 loading="lazy"
               />
-              <h2 className={css.title}>Movie title</h2>
+              <h2 className={css.title}>{ movie.title}</h2>
             </div>
           </li>
         );
